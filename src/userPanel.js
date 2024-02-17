@@ -2,86 +2,172 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import Calendar from "./calendar";
-import ToggleButtons from "./toggleButtons";
+import TodayButton from "./todayButton";
 
-export default function UserPanel() {
+export default function UserPanel({
+  setPosition,
+  setWeatherData,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  setAdditionalData,
+  setShowAdditionalMarkers,
+  latitudeDevianceAdditionalMarkers,
+  longitudeDevianceAdditionalMarkers,
+}) {
   const [location, setLocation] = useState("");
-  const [weatherData, setWeatherData] = useState([]);
 
-  // in try catch finally block (error start with console.log(err);, later change)
+  function formatDateForAPI(date) {
+    var d = new Date(date);
+    var month = "" + (d.getMonth() + 1);
+    var day = "" + d.getDate();
+    var year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
 
   useEffect(() => {
-    async function fetchGeoData() {
+    const abortController = new AbortController();
+    async function fetchData() {
       try {
         //fetch geolocation
         const fetchedGeoData = await fetch(
-          `https://geocoding-api.open-meteo.com/v1/search?name=${location}`
+          `https://geocoding-api.open-meteo.com/v1/search?name=${location}`,
+          { signal: abortController.signal }
         );
-        const parsedFetchedGeoData = await fetchedGeoData.json();
-        if (parsedFetchedGeoData.results) {
+        const parsedGeoData = await fetchedGeoData.json();
+        if (parsedGeoData.results) {
           const { latitude, longitude, timezone, name } =
-            parsedFetchedGeoData.results["0"];
-          //fetch actual weather data
-          //TODO add start date and end date for data
-          const weatherData = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min&start_date=2024-02-15&end_date=2024-02-17`
+            parsedGeoData.results["0"];
+          setPosition([latitude, longitude]);
+          //fetch actual data
+          let APIStartDate = formatDateForAPI(startDate);
+          let APIEndDate = formatDateForAPI(endDate);
+          const fetchedWeatherData = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min&start_date=${APIStartDate}&end_date=${APIEndDate}`,
+            { signal: abortController.signal }
           );
-          const parsedWeatherData = await weatherData.json();
-          setWeatherData(parsedWeatherData);
-          console.log(parsedWeatherData);
+          const parsedWeatherData = await fetchedWeatherData.json();
+          if (parsedWeatherData.daily) {
+            setWeatherData(parsedWeatherData);
+            console.log(parsedWeatherData);
+            //get weathercodes from geolocations deviating from the above, to draw logos on map
+            //get weathercode for additionalMarker1
+            const fetchedAdditionalData1 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude + latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude + longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData1 = await fetchedAdditionalData1.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional1: parsedAdditionalData1,
+            }));
+            // get weathercode for additionalMarker2
+            const fetchedAdditionalData2 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude + latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude - longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData2 = await fetchedAdditionalData2.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional2: parsedAdditionalData2,
+            }));
+            // get weathercode for additionalMarker3
+            const fetchedAdditionalData3 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude - latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude + longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData3 = await fetchedAdditionalData3.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional3: parsedAdditionalData3,
+            }));
+            // get weathercode for additionalMarker4
+            const fetchedAdditionalData4 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude - latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude - longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData4 = await fetchedAdditionalData4.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional4: parsedAdditionalData4,
+            }));
+            //
+            setShowAdditionalMarkers(true);
+            console.log(parsedAdditionalData1);
+          }
         }
       } catch (error) {
+        // if (!abortController.signal.aborted) {
+        //   console.log(error);
+        // }
         console.log(error);
         //alert?
       }
     }
-    fetchGeoData();
-  }, [location]);
+    if (startDate && endDate) {
+      fetchData();
+    }
+    return () => {
+      abortController.abort();
+    };
+  }, [
+    location,
+    setPosition,
+    setWeatherData,
+    endDate,
+    startDate,
+    setAdditionalData,
+    setShowAdditionalMarkers,
+    latitudeDevianceAdditionalMarkers,
+    longitudeDevianceAdditionalMarkers,
+  ]);
 
   return (
     <div className="user-panel">
-      {/* Only use data if the returned object is no empty object. Empty objects are returned by geo-api if no match is found */}
-      {/* {data?.results?.["0"]?.id && <div>{data.results["0"].id}</div>} */}
       <div className="flex-dir-row">
         <InputGroup size="lg" className="mb-0">
-          {/* <InputGroup.Text id="city">Where?</InputGroup.Text> */}
           <Form.Control
-            placeholder="City..."
-            aria-label="City"
-            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Country or City..."
+            aria-label="Place"
+            onChange={(e) => {
+              setLocation(e.target.value);
+            }}
           />
         </InputGroup>
+        <TodayButton
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          startDate={startDate}
+          endDate={endDate}
+        ></TodayButton>
       </div>
       <div className="flex-dir-row">
         <InputGroup size="lg" className="mb-0">
-          {/* <InputGroup.Text id="date">When?</InputGroup.Text> */}
-          <ToggleButtons></ToggleButtons>
-          <Calendar />
+          <Calendar
+            startDate={startDate}
+            endDate={endDate}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+          />
         </InputGroup>
       </div>
     </div>
   );
 }
-
-/* <ToggleButton
-        type="checkbox"
-        variant="secondary"
-        checked={checked}
-        value="1"
-        onChange={(e) => setChecked(e.currentTarget.checked)}
-      >
-        Checked
-      </ToggleButton> */
-
-/* <FloatingLabel
-        controlId="floatingCity"
-        label="Which City?"
-        className="mb-3"
-      >
-        <Form.Control type="string" placeholder="Which City?" />
-      </FloatingLabel>
-      <FloatingLabel controlId="floatingDate" label="Which Date">
-        <Form.Control type="date" placeholder="Which Date?" />
-      </FloatingLabel> */
-
-/* <Button variant="secondary" id="weather-input" as="input"></Button> */

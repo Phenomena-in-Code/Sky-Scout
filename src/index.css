@@ -1,4 +1,6 @@
+/* styling main container */
 .flex-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-height: 100vh;
@@ -6,7 +8,7 @@
   margin: auto;
 }
 
-/* sizing map container */
+/* styling map */
 .leaflet-container {
   flex: 1 1 100vh;
   z-index: 1;
@@ -14,12 +16,12 @@
 
 .leaflet-marker-icon {
   height: 5vh;
-  /* width: 70px; */
 }
 
+/* styling user panel */
 .user-panel {
   background-color: rgb(117, 183, 209);
-  width: 1000px;
+  width: 330px;
   max-width: 100vw;
   display: flex;
   flex-direction: column;
@@ -28,48 +30,10 @@
   z-index: 2;
   position: absolute;
   left: 50%;
-  top: 2%;
+  top: 1.5%;
   transform: translateX(-50%);
   padding: 0.5em;
-  gap: 0.5em;
   border-radius: 10px;
-}
-
-#weather-input {
-  margin: auto;
-  height: 20%;
-  width: 40%;
-}
-
-.flex-dir-row {
-  display: flex;
-  align-items: stretch;
-}
-
-.react-datepicker__input-container,
-input {
-  height: 100%;
-  border-radius: 10px;
-}
-
-.react-datepicker__input-container {
-  height: 100%;
-}
-
-.btn-group {
-  margin-bottom: 0px;
-}
-
-.calendar {
-  border-width: 0px;
-  margin-left: 6px;
-  font-size: large;
-  /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  transition-behavior: normal, normal;
-  transition-duration: 0.15s, 0.15s;
-  transition-timing-function: ease-in-out, ease-in-out;
-  transition-delay: 0s, 0s;
-  transition-property: border-color, box-shadow; */
 }
 
 .flex-dir-column {
@@ -79,4 +43,60 @@ input {
 .form-control {
   font-size: small;
   font-weight: inherit;
+}
+
+.flex-dir-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.flex-container .btn {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-group {
+  margin-bottom: 0px;
+}
+
+/* styling calendar in user panel */
+.react-datepicker__input-container {
+  height: 100%;
+}
+
+div.react-datepicker__input-container,
+.react-datepicker__input-container input,
+div.react-datepicker-wrapper {
+  width: 100%;
+}
+
+div.react-datepicker-wrapper {
+  margin-top: 8px;
+}
+
+.calendar {
+  border-width: 0px;
+  margin-left: 0px;
+  font-size: large;
+  height: 100%;
+  border-radius: 10px;
+}
+
+/* styling weather details */
+.day > * {
+  margin: 0;
+}
+
+.weather-details {
+  display: flex;
+  gap: 2em;
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  max-width: 100%;
+  overflow: scroll;
+  z-index: 2;
+  background-color: rgb(117, 183, 209, 0.6);
+  transform: translateX(-50%);
 }

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function Calendar() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+export default function Calendar({
+  startDate,
+  endDate,
+  setStartDate,
+  setEndDate,
+}) {
+  const currentDate = new Date();
+  const maxDate = new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000);
   return (
     <>
       <DatePicker
@@ -14,6 +18,7 @@ export default function Calendar() {
         selectsStart
         startDate={startDate}
         endDate={endDate}
+        minDate={currentDate}
         className="calendar"
       />
       <DatePicker
@@ -24,6 +29,7 @@ export default function Calendar() {
         startDate={startDate}
         endDate={endDate}
         minDate={startDate}
+        maxDate={maxDate}
         className="calendar"
       />
     </>
