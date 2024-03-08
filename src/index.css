@@ -27,7 +27,7 @@
   flex-direction: column;
   margin: auto;
   flex: 1 1;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   left: 50%;
   top: 1.5%;
@@ -88,7 +88,7 @@ div.react-datepicker-wrapper {
   margin: 0;
 }
 
-.weather-details {
+/* .weather-details-old {
   display: flex;
   gap: 2em;
   position: absolute;
@@ -99,4 +99,45 @@ div.react-datepicker-wrapper {
   z-index: 2;
   background-color: rgb(117, 183, 209, 0.6);
   transform: translateX(-50%);
+} */
+
+.weatherTable {
+  display: flex;
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  max-width: 100%;
+  max-height: 30%;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
+.weatherTable th,
+.weatherTable td {
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+/* .inline-image {
+  width: 10px;
+} */
+
+table.table td,
+table.table th {
+  background-color: rgb(117, 183, 209);
+}
+
+table.table .highlighted {
+  background-color: rgb(187, 117, 33);
+}
+
+table.table p {
+  margin: 0px;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.sticky-col {
+  position: sticky;
+  left: 0;
 }
