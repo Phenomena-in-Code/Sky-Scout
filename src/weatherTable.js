@@ -2,6 +2,7 @@ import Table from "react-bootstrap/Table";
 import { getImage } from "./weatherMarkers";
 import leftArrow from "./images/left-arrow-svgrepo-com.svg";
 import rightArrow from "./images/right-arrow-svgrepo-com.svg";
+import JumpIntoViewCell from "./jumpIntoViewCell";
 
 function WeatherTable({
   formattedDateArray,
@@ -9,10 +10,6 @@ function WeatherTable({
   highlightedDate,
   setHighlightedDate,
 }) {
-  // console.log(typeof formattedDateArray);
-  // console.log(formattedDateArray);
-  // console.log(highlightedDate);
-
   function handleLeftClick() {
     if (highlightedDate > 0) {
       setHighlightedDate((highlightedDate) => highlightedDate - 1);
@@ -20,24 +17,16 @@ function WeatherTable({
   }
 
   function handleRightClick() {
-    // console.log("grrr");
-    // console.log(highlightedDate);
     if (highlightedDate < formattedDateArray.length - 1) {
       setHighlightedDate((highlightedDate) => highlightedDate + 1);
-      // console.log("grrr");
-      // console.log(highlightedDate);
     }
   }
 
-  // for (let i = formattedDateArray.length; i > 0; i--) {
-  //   eval("const " + "column" + i + "= " + "useRef(null)" + ";");
-  // }
-
   return (
-    <Table responsive>
+    <Table responsive size="sm">
       <thead>
         <tr>
-          <th style={{ verticalAlign: "middle" }}>
+          <th className="sticky-col" style={{ verticalAlign: "middle" }}>
             <div
               style={{
                 display: "flex",
@@ -61,12 +50,15 @@ function WeatherTable({
             </div>
           </th>
           {formattedDateArray.map((date, i) => (
-            <th key={i} className={highlightedDate === i && "highlighted"}>
+            <th
+              key={i}
+              className={highlightedDate === i ? "highlighted" : undefined}
+            >
               {date}
 
               <div>
                 <img
-                  style={{ width: "50px" }}
+                  style={{ width: "50px", margin: "-10px" }}
                   src={getImage(weatherData.daily.weathercode[i])}
                   alt=""
                 ></img>
@@ -77,25 +69,45 @@ function WeatherTable({
       </thead>
       <tbody>
         <tr>
-          <td>Temperature +</td>
+          <td className="sticky-col">Temperature +</td>
+
+          {/* <JumpIntoViewCell
+            formattedDateArray={formattedDateArray}
+            highlightedDate={highlightedDate}
+            weatherData={weatherData}
+          /> */}
+
           {formattedDateArray.map((_, i) => (
-            <td key={i} className={highlightedDate === i && "highlighted"}>
-              {weatherData.daily.temperature_2m_max[i]} °C
-            </td>
+            <JumpIntoViewCell
+              key={i}
+              i={i}
+              highlightedDate={highlightedDate}
+              weatherData={weatherData}
+            />
+
+            // Hoe zorg ik er hierboven voor dat als (highlightedDate === i), dat de td met key 'i' in focus wordt gebracht?
+            // id? ref?
           ))}
         </tr>
+
         <tr>
-          <td>Temperature -</td>
+          <td className="sticky-col">Temperature -</td>
           {formattedDateArray.map((_, i) => (
-            <td key={i} className={highlightedDate === i && "highlighted"}>
+            <td
+              key={i}
+              className={highlightedDate === i ? "highlighted" : undefined}
+            >
               {weatherData.daily.temperature_2m_min[i]} °C
             </td>
           ))}
         </tr>
         <tr>
-          <td>Precipitation</td>
+          <td className="sticky-col">Precipitation</td>
           {formattedDateArray.map((_, i) => (
-            <td key={i} className={highlightedDate === i && "highlighted"}>
+            <td
+              key={i}
+              className={highlightedDate === i ? "highlighted" : undefined}
+            >
               {weatherData.daily.precipitation_sum[i]} mm
             </td>
           ))}

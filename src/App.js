@@ -9,18 +9,13 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [additionalData, setAdditionalData] = useState({
-    additional1: null,
-    additional2: null,
-    additional3: null,
-    additional4: null,
-  });
+  const [additionalData, setAdditionalData] = useState({});
+  const [highlightedDate, setHighlightedDate] = useState(0);
   const [showAdditionalMarkers, setShowAdditionalMarkers] = useState(false);
-  const latitudeDevianceAdditionalMarkers = 0.12;
-  const longitudeDevianceAdditionalMarkers = 0.2;
-
-  // const latitudeDevianceAdditionalMarkers = 0.06;
-  // const longitudeDevianceAdditionalMarkers = 0.1;
+  const latitudeDevianceAdditionalMarkers = 0.24;
+  const longitudeDevianceAdditionalMarkers = 0.4;
+  // const latitudeDevianceAdditionalMarkers = 0.12;
+  // const longitudeDevianceAdditionalMarkers = 0.2;
 
   // can I not link to index.css in index.html to be able to remove this?
   document.body.style.position = "relative";
@@ -29,6 +24,7 @@ function App() {
     <div className="flex-container">
       <UserPanel
         setPosition={setPosition}
+        weatherData={weatherData}
         setWeatherData={setWeatherData}
         endDate={endDate}
         setEndDate={setEndDate}
@@ -39,6 +35,7 @@ function App() {
         setShowAdditionalMarkers={setShowAdditionalMarkers}
         latitudeDevianceAdditionalMarkers={latitudeDevianceAdditionalMarkers}
         longitudeDevianceAdditionalMarkers={longitudeDevianceAdditionalMarkers}
+        setHighlightedDate={setHighlightedDate}
       />
       <Map
         position={position}
@@ -49,11 +46,14 @@ function App() {
         showAdditionalMarkers={showAdditionalMarkers}
         latitudeDevianceAdditionalMarkers={latitudeDevianceAdditionalMarkers}
         longitudeDevianceAdditionalMarkers={longitudeDevianceAdditionalMarkers}
+        highlightedDate={highlightedDate}
       />
       <WeatherDetails
         weatherData={weatherData}
         startDate={startDate}
         endDate={endDate}
+        highlightedDate={highlightedDate}
+        setHighlightedDate={setHighlightedDate}
       />
     </div>
   );
