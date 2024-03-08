@@ -23,13 +23,9 @@ export default function Map({
   longitudeDevianceAdditionalMarkers,
   highlightedDate,
 }) {
-  let zoomLevel;
+  let moreMarkers = true;
   if (window.matchMedia("(max-width: 700px)").matches) {
-    zoomLevel = 9;
-    console.log("smartph");
-  } else {
-    zoomLevel = 10;
-    console.log("geen smartph");
+    moreMarkers = false;
   }
 
   const positionMarker1 = [
@@ -95,7 +91,7 @@ export default function Map({
   }
 
   return (
-    <MapContainer center={position} zoom={zoomLevel}>
+    <MapContainer center={position} zoom={9}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">Open Street Map</a> contributors'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -155,7 +151,7 @@ export default function Map({
             )}
             position={positionMarker8}
           ></Marker>
-          {zoomLevel === 10 && (
+          {moreMarkers && (
             <>
               <Marker
                 icon={getIcon(
