@@ -12,7 +12,6 @@ export default function TodayButton({
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    console.log("begin");
     if (startDate) {
       if (startDate.getDate() !== date.getDate()) {
         setChecked(false);
@@ -28,7 +27,6 @@ export default function TodayButton({
         startDate.getDate() === date.getDate() &&
         endDate.getDate() === date.getDate()
       ) {
-        console.log("werkt");
         setChecked(true);
       }
     }
