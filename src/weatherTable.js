@@ -10,20 +10,20 @@ function WeatherTable({
   highlightedDate,
   setHighlightedDate,
 }) {
-  function handleLeftClick() {
+  function handleLeftArrow() {
     if (highlightedDate > 0) {
       setHighlightedDate((highlightedDate) => highlightedDate - 1);
     }
   }
 
-  function handleRightClick() {
+  function handleRightArrow() {
     if (highlightedDate < formattedDateArray.length - 1) {
       setHighlightedDate((highlightedDate) => highlightedDate + 1);
     }
   }
 
   return (
-    <Table responsive size="sm">
+    <Table responsive size="sm" bordered>
       <thead>
         <tr>
           <th className="sticky-col" style={{ verticalAlign: "middle" }}>
@@ -38,14 +38,14 @@ function WeatherTable({
                 style={{ width: "30px" }}
                 src={leftArrow}
                 alt=""
-                onClick={handleLeftClick}
+                onClick={handleLeftArrow}
               ></img>
               <p>Date</p>
               <img
                 style={{ width: "30px" }}
                 src={rightArrow}
                 alt=""
-                onClick={handleRightClick}
+                onClick={handleRightArrow}
               ></img>
             </div>
           </th>
@@ -53,6 +53,9 @@ function WeatherTable({
             <th
               key={i}
               className={highlightedDate === i ? "highlighted" : undefined}
+              onClick={() => {
+                setHighlightedDate(i);
+              }}
             >
               {date}
 
@@ -71,22 +74,14 @@ function WeatherTable({
         <tr>
           <td className="sticky-col">Temperature +</td>
 
-          {/* <JumpIntoViewCell
-            formattedDateArray={formattedDateArray}
-            highlightedDate={highlightedDate}
-            weatherData={weatherData}
-          /> */}
-
           {formattedDateArray.map((_, i) => (
             <JumpIntoViewCell
               key={i}
               i={i}
               highlightedDate={highlightedDate}
               weatherData={weatherData}
+              setHighlightedDate={setHighlightedDate}
             />
-
-            // Hoe zorg ik er hierboven voor dat als (highlightedDate === i), dat de td met key 'i' in focus wordt gebracht?
-            // id? ref?
           ))}
         </tr>
 
@@ -96,6 +91,9 @@ function WeatherTable({
             <td
               key={i}
               className={highlightedDate === i ? "highlighted" : undefined}
+              onClick={() => {
+                setHighlightedDate(i);
+              }}
             >
               {weatherData.daily.temperature_2m_min[i]} °C
             </td>
@@ -107,6 +105,9 @@ function WeatherTable({
             <td
               key={i}
               className={highlightedDate === i ? "highlighted" : undefined}
+              onClick={() => {
+                setHighlightedDate(i);
+              }}
             >
               {weatherData.daily.precipitation_sum[i]} mm
             </td>
