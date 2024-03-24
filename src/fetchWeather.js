@@ -9,7 +9,8 @@ export default async function fetchWeather(
   setWeatherData,
   setAdditionalData,
   setShowAdditionalMarkers,
-  setHighlightedDate
+  setHighlightedDate,
+  setLocationResult
 ) {
   function formatDateForAPI(date) {
     var d = new Date(date);
@@ -23,14 +24,13 @@ export default async function fetchWeather(
     return [year, month, day].join("-");
   }
 
-  let smallScreen;
+  let smallScreen = false;
   if (window.matchMedia("(max-width: 700px)").matches) {
     smallScreen = true;
-  } else {
-    smallScreen = false;
   }
 
   try {
+    setLocationResult(null);
     setHighlightedDate(0);
     //fetch geolocation of the provided city or country name
     const fetchedGeoData = await fetch(
@@ -39,6 +39,7 @@ export default async function fetchWeather(
     );
     const parsedGeoData = await fetchedGeoData.json();
     if (parsedGeoData.results) {
+      setLocationResult(parsedGeoData.results[0].name);
       const { latitude, longitude, timezone } = parsedGeoData.results["0"];
       setPosition([latitude, longitude]);
       //fetch weather data for the retrieved coordinates
@@ -152,58 +153,61 @@ export default async function fetchWeather(
             ...additionalData,
             additional8: parsedAdditionalData8,
           }));
-          // .. additionalMarker9
-          const fetchedAdditionalData9 = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${
-              latitude + latitudeDevianceAdditionalMarkers
-            }&longitude=${
-              longitude + 3 * longitudeDevianceAdditionalMarkers
-            }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
-          );
-          const parsedAdditionalData9 = await fetchedAdditionalData9.json();
-          setAdditionalData((additionalData) => ({
-            ...additionalData,
-            additional9: parsedAdditionalData9,
-          }));
-          // .. additionalMarker10
-          const fetchedAdditionalData10 = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${
-              latitude - latitudeDevianceAdditionalMarkers
-            }&longitude=${
-              longitude + 3 * longitudeDevianceAdditionalMarkers
-            }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
-          );
-          const parsedAdditionalData10 = await fetchedAdditionalData10.json();
-          setAdditionalData((additionalData) => ({
-            ...additionalData,
-            additional10: parsedAdditionalData10,
-          }));
-          // .. additionalMarker11
-          const fetchedAdditionalData11 = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${
-              latitude + latitudeDevianceAdditionalMarkers
-            }&longitude=${
-              longitude - 3 * longitudeDevianceAdditionalMarkers
-            }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
-          );
-          const parsedAdditionalData11 = await fetchedAdditionalData11.json();
-          setAdditionalData((additionalData) => ({
-            ...additionalData,
-            additional11: parsedAdditionalData11,
-          }));
-          // .. additionalMarker12
-          const fetchedAdditionalData12 = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${
-              latitude - latitudeDevianceAdditionalMarkers
-            }&longitude=${
-              longitude - 3 * longitudeDevianceAdditionalMarkers
-            }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
-          );
-          const parsedAdditionalData12 = await fetchedAdditionalData12.json();
-          setAdditionalData((additionalData) => ({
-            ...additionalData,
-            additional12: parsedAdditionalData12,
-          }));
+
+          if (smallScreen === false) {
+            // .. additionalMarker9
+            const fetchedAdditionalData9 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude + latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude + 3 * longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData9 = await fetchedAdditionalData9.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional9: parsedAdditionalData9,
+            }));
+            // .. additionalMarker10
+            const fetchedAdditionalData10 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude - latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude + 3 * longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData10 = await fetchedAdditionalData10.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional10: parsedAdditionalData10,
+            }));
+            // .. additionalMarker11
+            const fetchedAdditionalData11 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude + latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude - 3 * longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData11 = await fetchedAdditionalData11.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional11: parsedAdditionalData11,
+            }));
+            // .. additionalMarker12
+            const fetchedAdditionalData12 = await fetch(
+              `https://api.open-meteo.com/v1/forecast?latitude=${
+                latitude - latitudeDevianceAdditionalMarkers
+              }&longitude=${
+                longitude - 3 * longitudeDevianceAdditionalMarkers
+              }&timezone=${timezone}&daily=weathercode&start_date=${APIStartDate}&end_date=${APIEndDate}`
+            );
+            const parsedAdditionalData12 = await fetchedAdditionalData12.json();
+            setAdditionalData((additionalData) => ({
+              ...additionalData,
+              additional12: parsedAdditionalData12,
+            }));
+          }
           //
           setShowAdditionalMarkers(true);
           console.log(parsedAdditionalData1);
