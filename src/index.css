@@ -19,8 +19,9 @@
 }
 
 /* styling user panel */
+/* prev. color: 117, 183, 209 */
 .user-panel {
-  background-color: rgb(117, 183, 209);
+  background-color: rgba(98, 181, 214, 0.9);
   width: 330px;
   max-width: 100vw;
   display: flex;
@@ -43,6 +44,12 @@
 .form-control {
   font-size: small;
   font-weight: inherit;
+  /* added inline styling to userPanel.js due to priority issues */
+}
+
+.input-group .location-preview {
+  color: #198754;
+  /* added inline styling to userPanel.js due to priority issues */
 }
 
 .flex-dir-row {
@@ -71,6 +78,10 @@ div.react-datepicker-wrapper {
   width: 100%;
 }
 
+.react-datepicker__input-container input {
+  padding: 4px;
+}
+
 div.react-datepicker-wrapper {
   margin-top: 8px;
 }
@@ -88,19 +99,6 @@ div.react-datepicker-wrapper {
   margin: 0;
 }
 
-/* .weather-details-old {
-  display: flex;
-  gap: 2em;
-  position: absolute;
-  bottom: 3%;
-  left: 50%;
-  max-width: 100%;
-  overflow: scroll;
-  z-index: 2;
-  background-color: rgb(117, 183, 209, 0.6);
-  transform: translateX(-50%);
-} */
-
 .weatherTable {
   display: flex;
   position: absolute;
@@ -112,23 +110,28 @@ div.react-datepicker-wrapper {
   transform: translateX(-50%);
 }
 
+.weatherTable table {
+  margin-bottom: 0px;
+  border-radius: 10px;
+}
+
+.weatherTable div {
+  border-radius: 10px;
+}
+
 .weatherTable th,
 .weatherTable td {
   vertical-align: top;
   white-space: nowrap;
 }
 
-/* .inline-image {
-  width: 10px;
-} */
-
 table.table td,
 table.table th {
-  background-color: rgb(117, 183, 209);
+  background-color: rgb(98, 181, 214, 0.9);
 }
 
 table.table .highlighted {
-  background-color: rgb(187, 117, 33);
+  background-color: rgb(187, 117, 33, 0.9);
 }
 
 table.table p {
