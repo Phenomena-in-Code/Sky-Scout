@@ -10,7 +10,7 @@ export default function JumpIntoViewCell({
 
   useEffect(() => {
     if (highlightedDate === i) {
-      ref1.current.scrollIntoView({ inline: "center" });
+      ref1.current.scrollIntoView({ inline: "end" });
     }
   }, [highlightedDate, i]);
 
