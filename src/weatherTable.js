@@ -23,7 +23,7 @@ function WeatherTable({
   }
 
   return (
-    <Table responsive size="sm" bordered>
+    <Table responsive bordered size="sm">
       <thead>
         <tr>
           <th className="sticky-col" style={{ verticalAlign: "middle" }}>
@@ -61,7 +61,12 @@ function WeatherTable({
 
               <div>
                 <img
-                  style={{ width: "50px", margin: "-10px" }}
+                  style={{
+                    width: "50px",
+                    margin: "-8px",
+                    marginLeft: "-5px",
+                    marginTop: "-12px",
+                  }}
                   src={getImage(weatherData.daily.weathercode[i])}
                   alt=""
                 ></img>

@@ -112,11 +112,6 @@ div.react-datepicker-wrapper {
 
 .weatherTable table {
   margin-bottom: 0px;
-  border-radius: 10px;
-}
-
-.weatherTable div {
-  border-radius: 10px;
 }
 
 .weatherTable th,

@@ -24,7 +24,7 @@ export default function WeatherDetails({
 
   return (
     weatherData && (
-      <div className="weatherTable">
+      <div className="weatherTable shadow-lg">
         <WeatherTable
           formattedDateArray={formattedDateArray}
           weatherData={weatherData}
