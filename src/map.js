@@ -24,8 +24,10 @@ export default function Map({
   highlightedDate,
 }) {
   let moreMarkers = true;
+  let zoomLevel = 10;
   if (window.matchMedia("(max-width: 700px)").matches) {
     moreMarkers = false;
+    zoomLevel = 9;
   }
 
   const positionMarker1 = [
@@ -91,7 +93,7 @@ export default function Map({
   }
 
   return (
-    <MapContainer center={position} zoom={9}>
+    <MapContainer center={position} zoom={zoomLevel}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">Open Street Map</a> contributors'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -151,7 +153,7 @@ export default function Map({
             )}
             position={positionMarker8}
           ></Marker>
-          {moreMarkers && (
+          {moreMarkers && additionalData.additional9 && (
             <>
               <Marker
                 icon={getIcon(
