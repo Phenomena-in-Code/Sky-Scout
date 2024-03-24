@@ -14,10 +14,7 @@ function App() {
   const [showAdditionalMarkers, setShowAdditionalMarkers] = useState(false);
   const latitudeDevianceAdditionalMarkers = 0.24;
   const longitudeDevianceAdditionalMarkers = 0.4;
-  // const latitudeDevianceAdditionalMarkers = 0.12;
-  // const longitudeDevianceAdditionalMarkers = 0.2;
 
-  // can I not link to index.css in index.html to be able to remove this?
   document.body.style.position = "relative";
 
   return (

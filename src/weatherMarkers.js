@@ -140,14 +140,3 @@ export const weatherMarker7 = new L.Icon({
   shadowAnchor: null,
   iconSize: new L.Point(120, 120),
 });
-
-//     [[0], "☀️"], marker 0
-//     [[1], "🌤"], marker 1
-//     [[2], "⛅️"], marker 1
-//     [[3], "☁️"], marker 2
-//     [[45, 48], "🌫"], fog marker 3
-//     [[51, 56, 61, 66, 80], "🌦"], light rain marker 4
-//     [[53, 55, 63, 65, 57, 67, 81, 82], "🌧"], heavy rain marker 5
-//     [[71, 73, 75, 77, 85, 86], "🌨"], snowfall marker 6
-//     [[95], "🌩"], thunderstorm marker 7
-//     [[96, 99], "⛈"], thunderstorm with hail marker (8) made into 7

@@ -10,11 +10,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-// reportWebVitals(console.log);
-
-// consider re-creating app.test.js:
-
-// consider re-creating setupTests.js
-
-// consider using github co-pilot
