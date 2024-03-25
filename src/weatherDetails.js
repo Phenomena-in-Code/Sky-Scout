@@ -20,7 +20,6 @@ export default function WeatherDetails({
     (formattedDateArray = weatherData?.daily?.time?.map((date) =>
       getFormattedDate(date)
     ));
-  console.log(formattedDateArray);
 
   return (
     weatherData && (

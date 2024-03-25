@@ -21,8 +21,6 @@ export default function UserPanel({
 }) {
   const [location, setLocation] = useState("");
   const [locationResult, setLocationResult] = useState(null);
-  console.log(weatherData);
-  console.log(locationResult);
 
   useEffect(() => {
     const abortController = new AbortController();

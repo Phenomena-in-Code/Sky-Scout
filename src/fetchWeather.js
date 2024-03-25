@@ -51,7 +51,6 @@ export default async function fetchWeather(
           { signal: abortController.signal }
         );
         const parsedWeatherData = await fetchedWeatherData.json();
-        console.log(parsedWeatherData);
         if (parsedWeatherData.daily) {
           // set weather data for the retrieved coordinates
           setWeatherData(parsedWeatherData);
@@ -210,7 +209,6 @@ export default async function fetchWeather(
           }
           //
           setShowAdditionalMarkers(true);
-          console.log(parsedAdditionalData1);
         }
       }
     }
