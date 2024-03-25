@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/sky-scout/static/css/main.41a18079.css",
+    "main.js": "/sky-scout/static/js/main.5321a6cc.js",
+    "static/media/day.svg": "/sky-scout/static/media/day.3e071266e8fb8e0856a54965d39ef6ad.svg",
+    "static/media/cloudy.svg": "/sky-scout/static/media/cloudy.de66e79c5d1fe244417948c5fdee2064.svg",
+    "static/media/thunder.svg": "/sky-scout/static/media/thunder.401ffd446d865c7b6069ff3f2ec073a7.svg",
+    "static/media/cloudy-day-1.svg": "/sky-scout/static/media/cloudy-day-1.5b28f42966161ed864a801a2ce279a59.svg",
+    "static/media/snowy-4.svg": "/sky-scout/static/media/snowy-4.b6f4d1233ada0d657a9f59fd03e335ab.svg",
+    "static/media/rainy-6.svg": "/sky-scout/static/media/rainy-6.f2c418ac51f5b69b7a56554623dc91b2.svg",
+    "static/media/rainy-4.svg": "/sky-scout/static/media/rainy-4.7e90e8f0a5128645a2351a57064d8281.svg",
+    "static/media/wi-fog.svg": "/sky-scout/static/media/wi-fog.7c3d1014174434d5d7082e5b119b2cf6.svg",
+    "static/media/right-arrow-svgrepo-com.svg": "/sky-scout/static/media/right-arrow-svgrepo-com.c8e5b64bb3d51787cffce7c037f4bc1f.svg",
+    "static/media/left-arrow-svgrepo-com.svg": "/sky-scout/static/media/left-arrow-svgrepo-com.0ddbd7539dbd2f5694ea5630eb76d6ab.svg",
+    "index.html": "/sky-scout/index.html",
+    "main.41a18079.css.map": "/sky-scout/static/css/main.41a18079.css.map",
+    "main.5321a6cc.js.map": "/sky-scout/static/js/main.5321a6cc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.41a18079.css",
+    "static/js/main.5321a6cc.js"
+  ]
+}
