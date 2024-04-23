@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Map from "./map";
 import UserPanel from "./userPanel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import WeatherDetails from "./weatherDetails";
 
 function App() {
@@ -16,6 +16,10 @@ function App() {
   const longitudeDevianceAdditionalMarkers = 0.4;
 
   document.body.style.position = "relative";
+
+  useEffect(() => {
+    document.title = "Sky Scout";
+  }, []);
 
   return (
     <div className="flex-container">
