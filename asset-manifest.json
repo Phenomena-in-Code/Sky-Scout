@@ -1,23 +1,21 @@
 {
   "files": {
-    "main.css": "/Sky-Scout/static/css/main.41a18079.css",
-    "main.js": "/Sky-Scout/static/js/main.f866a1cf.js",
-    "static/media/day.svg": "/Sky-Scout/static/media/day.3e071266e8fb8e0856a54965d39ef6ad.svg",
-    "static/media/cloudy.svg": "/Sky-Scout/static/media/cloudy.de66e79c5d1fe244417948c5fdee2064.svg",
-    "static/media/thunder.svg": "/Sky-Scout/static/media/thunder.401ffd446d865c7b6069ff3f2ec073a7.svg",
-    "static/media/cloudy-day-1.svg": "/Sky-Scout/static/media/cloudy-day-1.5b28f42966161ed864a801a2ce279a59.svg",
-    "static/media/snowy-4.svg": "/Sky-Scout/static/media/snowy-4.b6f4d1233ada0d657a9f59fd03e335ab.svg",
-    "static/media/rainy-6.svg": "/Sky-Scout/static/media/rainy-6.f2c418ac51f5b69b7a56554623dc91b2.svg",
-    "static/media/rainy-4.svg": "/Sky-Scout/static/media/rainy-4.7e90e8f0a5128645a2351a57064d8281.svg",
-    "static/media/wi-fog.svg": "/Sky-Scout/static/media/wi-fog.7c3d1014174434d5d7082e5b119b2cf6.svg",
+    "main.css": "/Sky-Scout/static/css/main.578be512.css",
+    "main.js": "/Sky-Scout/static/js/main.d572feaf.js",
+    "static/media/day.svg": "/Sky-Scout/static/media/day.2eac2ef7c26ea19a1c806019e859b1c6.svg",
+    "static/media/cloudy.svg": "/Sky-Scout/static/media/cloudy.ab8f1a2c024ef0c5e9e35d407034f29f.svg",
+    "static/media/thunder.svg": "/Sky-Scout/static/media/thunder.22b99e455460f9294bec1e9498b44fb6.svg",
+    "static/media/cloudy-day-1.svg": "/Sky-Scout/static/media/cloudy-day-1.4e64d436a1fea95111356d342977a97f.svg",
+    "static/media/snowy-4.svg": "/Sky-Scout/static/media/snowy-4.e23e642b1968183b59db2994ed5019bf.svg",
+    "static/media/rainy-6.svg": "/Sky-Scout/static/media/rainy-6.d3aa6e1a4e7a81d69c88295c2b0b34e1.svg",
+    "static/media/rainy-4.svg": "/Sky-Scout/static/media/rainy-4.92e50b8b6352685796ddb8e5cb167e88.svg",
+    "static/media/wi-fog.svg": "/Sky-Scout/static/media/wi-fog.bc24dd649ab75ebc9afb9dd5d40bfa15.svg",
     "static/media/right-arrow-svgrepo-com.svg": "/Sky-Scout/static/media/right-arrow-svgrepo-com.c8e5b64bb3d51787cffce7c037f4bc1f.svg",
     "static/media/left-arrow-svgrepo-com.svg": "/Sky-Scout/static/media/left-arrow-svgrepo-com.0ddbd7539dbd2f5694ea5630eb76d6ab.svg",
-    "index.html": "/Sky-Scout/index.html",
-    "main.41a18079.css.map": "/Sky-Scout/static/css/main.41a18079.css.map",
-    "main.f866a1cf.js.map": "/Sky-Scout/static/js/main.f866a1cf.js.map"
+    "index.html": "/Sky-Scout/index.html"
   },
   "entrypoints": [
-    "static/css/main.41a18079.css",
-    "static/js/main.f866a1cf.js"
+    "static/css/main.578be512.css",
+    "static/js/main.d572feaf.js"
   ]
 }
